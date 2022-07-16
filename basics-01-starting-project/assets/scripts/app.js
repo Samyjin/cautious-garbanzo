@@ -1,16 +1,55 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
-let globalVariable = "toto";
 
-currentResult = ((currentResult + 10) * 3) / 2 - 2 ** 2; // ** ==> Power operator
+/* 
 
-let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - (2 ** 2)`;
+This is a block comment 
 
-currentResult = add(10, 11);
+*/
 
-outputResult(currentResult, calculationDescription);
 
-function add(n1, n2) {
-    globalVariable = "Add"; // Don't forget about global variable. Sometimes could be useful.
-    return n1 + n2;
+// Gets input from input field
+function getUserInputAsNumber() {
+    return parseInt(userInput.value);
 }
+
+function createAndWriteOutput(operator, numberBeforeCalculation, calcNumber) {
+    const descCalculation = `${numberBeforeCalculation} ${operator} ${calcNumber}`;
+    outputResult(currentResult, descCalculation); // from vendor file
+}
+
+function add() {
+    const enteredNumber = getUserInputAsNumber();
+    const prevResult = currentResult;
+    currentResult += enteredNumber; // currentResult += +userInput.value; <-- shortcut to parse it as number
+    createAndWriteOutput("+", prevResult, enteredNumber);
+}
+
+function substract() {
+    const enteredNumber = getUserInputAsNumber();
+    const prevResult = currentResult;
+    currentResult -= enteredNumber;
+    createAndWriteOutput("-", prevResult, enteredNumber);
+}
+
+function multiply() {
+    const enteredNumber = getUserInputAsNumber();
+    const prevResult = currentResult;
+    currentResult *= enteredNumber;
+    createAndWriteOutput("*", prevResult, enteredNumber);
+}
+
+function divide() {
+    const enteredNumber = getUserInputAsNumber();
+    const prevResult = currentResult;
+    currentResult /= enteredNumber;
+    createAndWriteOutput("/", prevResult, enteredNumber);
+}
+
+addBtn.addEventListener("click", add);
+divideBtn.addEventListener("click", divide);
+subtractBtn.addEventListener("click", substract);
+multiplyBtn.addEventListener("click", multiply);
+
+
+
