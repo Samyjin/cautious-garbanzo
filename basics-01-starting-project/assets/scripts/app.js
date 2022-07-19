@@ -40,7 +40,6 @@ function add() {
     currentResult += enteredNumber; // currentResult += +userInput.value; <-- shortcut to parse it as number
     createAndWriteOutput("+", prevResult, enteredNumber);
     writeToLog("+", prevResult, enteredNumber, currentResult);
-
 }
 
 function substract() {
