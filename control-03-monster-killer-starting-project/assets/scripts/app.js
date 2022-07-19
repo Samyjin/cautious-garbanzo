@@ -11,7 +11,9 @@ let hasBonusLife = true;
 function reset() {
     currentPlayerHealth = chosenMaxLife;
     currentMonsterHealth = chosenMaxLife;
+    hasBonusLife = true;
     resetGame(chosenMaxLife);
+    restoreBonusLife();
 }
 
 function endTurn() {
