@@ -33,10 +33,26 @@ function writeToLog(event, value, playerHP, monsterHP) {
         finalMonsterHealth: monsterHP,
         finalPlayerHealth: playerHP,
     };
-    if (event === LOG_PLAYER_ATTACK || event === LOG_PLAYER_STRONG_ATTACK) {
-        logEntry.target = "MONSTER";
-    } else if (event === LOG_MONSTER_ATTACK || event === LOG_PLAYER_HEAL) {
-        logEntry.target = "PLAYER";
+    // if (event === LOG_PLAYER_ATTACK || event === LOG_PLAYER_STRONG_ATTACK) {
+    //     logEntry.target = "MONSTER";
+    // } else if (event === LOG_MONSTER_ATTACK || event === LOG_PLAYER_HEAL) {
+    //     logEntry.target = "PLAYER";
+    // }
+    
+    /* 
+    *
+    If one case is valid, if there is no break keyword, cases are apply falling through 
+    *
+    */
+    switch (event) {
+        case LOG_PLAYER_ATTACK:
+        case LOG_PLAYER_STRONG_ATTACK:
+            logEntry.target = "MONSTER";
+            break;
+        case LOG_MONSTER_ATTACK:
+        case LOG_PLAYER_HEAL:
+            logEntry.target = "PLAYER";
+            break;
     }
     battleLog.push(logEntry);
 }
@@ -98,25 +114,22 @@ function endTurn() {
 }
 
 function attackMonster(mode) {
-    let maxDmg;
-    let logEvent;
-    if (mode === MODE_ATTACK) {
-        maxDmg = ATTACK_VALUE;
-        logEvent = LOG_PLAYER_ATTACK;
-    } else if (mode === MODE_STRONG_ATTACK) {
-        maxDmg = STRONG_ATTACK_VALUE;
-        logEvent = LOG_PLAYER_STRONG_ATTACK;
-    }
+    const maxDmg = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
+    const logEvent =
+        mode === MODE_ATTACK ? LOG_PLAYER_ATTACK : LOG_PLAYER_STRONG_ATTACK;
+    // if (mode === MODE_ATTACK) {
+    //     maxDmg = ATTACK_VALUE;
+    //     logEvent = LOG_PLAYER_ATTACK;
+    // } else if (mode === MODE_STRONG_ATTACK) {
+    //     maxDmg = STRONG_ATTACK_VALUE;
+    //     logEvent = LOG_PLAYER_STRONG_ATTACK;
+    // }
     const damage = dealMonsterDamage(maxDmg);
     currentMonsterHealth -= damage;
-    writeToLog(
-        logEvent,
-        damage,
-        currentPlayerHealth,
-        currentMonsterHealth
-    );
+    writeToLog(logEvent, damage, currentPlayerHealth, currentMonsterHealth);
     endTurn();
 }
+
 function onAttack() {
     attackMonster(MODE_ATTACK);
 }
