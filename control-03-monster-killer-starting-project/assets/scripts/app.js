@@ -15,7 +15,6 @@ let battleLog = [];
 
 const enteredValue = prompt("Choose MaxLife: ", "100");
 let chosenMaxLife = parseInt(enteredValue);
-console.log(chosenMaxLife);
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
     chosenMaxLife = 100;
 }
@@ -117,13 +116,6 @@ function attackMonster(mode) {
     const maxDmg = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
     const logEvent =
         mode === MODE_ATTACK ? LOG_PLAYER_ATTACK : LOG_PLAYER_STRONG_ATTACK;
-    // if (mode === MODE_ATTACK) {
-    //     maxDmg = ATTACK_VALUE;
-    //     logEvent = LOG_PLAYER_ATTACK;
-    // } else if (mode === MODE_STRONG_ATTACK) {
-    //     maxDmg = STRONG_ATTACK_VALUE;
-    //     logEvent = LOG_PLAYER_STRONG_ATTACK;
-    // }
     const damage = dealMonsterDamage(maxDmg);
     currentMonsterHealth -= damage;
     writeToLog(logEvent, damage, currentPlayerHealth, currentMonsterHealth);
@@ -158,7 +150,38 @@ function onHeal() {
 }
 
 function onLog() {
-    console.log(battleLog);
+
+    /* Interresting feature: label 
+    *
+    * Rarely use but present in the language.
+    * 
+    */
+
+    outerWhile: do { // This is a label.
+        let j = 0;
+        innerLoop: for (let k = 0; k < 5; k++) {
+            console.log(`j: ${j} k: ${k} `);
+            if (k === 3) {
+                break outerWhile;
+            }
+        }
+    } while (i < 3);
+
+
+    // for (let i = 0; i < battleLog.length; i++) {
+    //     console.log(battleLog[i]);
+    // }
+
+    // for-of is used for array ( strings are array of character ). 
+    let i = 0;
+    for (const logEntry of battleLog) {
+        console.log(`#${i}`);
+        for (const property in logEntry) {
+            console.log(`${property} => ${logEntry[property]}`);
+        }
+        i++;
+    }
+
 }
 
 attackBtn.addEventListener("click", onAttack);
