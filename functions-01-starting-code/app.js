@@ -14,7 +14,7 @@ const getplayerChoise = () => {
     const choice = prompt(`${ROCK}, ${PAPER} or ${SCISSORS}?`).toUpperCase();
     if (choice !== ROCK && choice !== PAPER && choice !== SCISSORS) {
         alert(`Invalid input ! We chose ${DEFAULT_CHOICE} for you!`);
-        return DEFAULT_CHOICE;
+        return;
     }
     return choice;
 };
@@ -33,12 +33,14 @@ const getComputerChoice = function () {
 };
 
 // One line arrow function omit return and brackets !
-const getWinner = (cChoice, pChoice) =>
+// On function parameters, if pChoice is undefined, default value of the parameter is taking
+// Order is important, you can use cChoice in pChoice declaration. For example: pChoice = cChoice == "ROCK" ? PAPER : DEFAULT_CHOICE.
+const getWinner = (cChoice, pChoice = DEFAULT_CHOICE) =>
     cChoice === pChoice
         ? RESULT_DRAW
         : (cChoice === ROCK && pChoice === PAPER) ||
           (cChoice === PAPER && pChoice === SCISSORS) ||
-          (cChoice === PAPER && pChoice === ROCK)
+          (cChoice === SCISSORS && pChoice === ROCK)
         ? RESULT_PLAYER_WIN
         : RESULT_COMPUTER_WIN;
 
@@ -63,10 +65,48 @@ startGameBtn.addEventListener("click", () => {
     console.log("Game is starting...");
     const playerSelection = getplayerChoise();
     const computerSelection = getComputerChoice();
-    const winner = getWinner(computerSelection, playerSelection);
+    const winner = playerSelection
+        ? getWinner(computerSelection, playerSelection)
+        : getWinner(computerSelection);
 
-    console.log(winner);
+    let message = `You picked ${
+        playerSelection || DEFAULT_CHOICE
+    } and computer picked ${computerSelection} therefore you `;
+
+    if (winner === RESULT_DRAW) message = message + "made a draw.";
+    else if (winner === RESULT_PLAYER_WIN) message = message + "win.";
+    else message = message + "lost.";
+
+    alert(message);
+    gameIsRunning = false;
 });
+
+// Not related to the game
+// Infinite args for a function.
+// REST Operator and arguments keyword
+
+const sumUp = (...numbers) => {
+    let sum = 0;
+    for (num of numbers) {
+        sum += num;
+    }
+
+    return sum;
+};
+
+const substractUp = function () {
+    let sum = 0;
+    for (num of arguments) {
+        // not really used. Prefer using rest operator
+        sum -= num;
+    }
+
+    return sum;
+};
+
+console.log(sumUp(1, 2, 3));
+console.log(sumUp(1, 2, 3, 4, 5));
+console.log(substractUp(10, 2, 3));
 
 /*
  *
