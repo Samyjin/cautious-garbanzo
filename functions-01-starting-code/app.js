@@ -32,7 +32,7 @@ const getComputerChoice = function () {
     }
 };
 
-// One line arrow function omit brackets !
+// One line arrow function omit return and brackets !
 const getWinner = (cChoice, pChoice) =>
     cChoice === pChoice
         ? RESULT_DRAW
