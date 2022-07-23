@@ -85,32 +85,33 @@ startGameBtn.addEventListener("click", () => {
 // Infinite args for a function.
 // REST Operator and arguments keyword
 
-const sumUp = (callBack, ...numbers) => {
+const combine = (resultHandler, operation = "SUB", ...numbers) => {
     let sum = 0;
     for (num of numbers) {
-        sum += num;
+        sum = operation === "ADD" ? sum + num : sum - num;
     }
 
-    callBack(sum);
+    resultHandler(sum) // First argument is fill by the bind() function;
 };
 
-const displayResult = (number) => {
-    alert("The result is " + number);
+// "The result after adding all argument is "
+const displayResult = (messageText, result) => {
+    alert(messageText + result);
 };
 
-const substractUp = function () {
-    let sum = 0;
-    for (num of arguments) {
-        // not really used. Prefer using rest operator
-        sum -= num;
-    }
+// const substractUp = function (resultHandler, ...number) {
+//     let sum = 0;
+//     for (num of numbers) {
+//         // not really used. Prefer using rest operator
+//         sum -= num;
+//     }
 
-    return sum;
-};
+//     resultHandler(result);
+// };
 
-sumUp(displayResult, 1, 2, 3);
-sumUp(displayResult, 1, 2, 3, 4, 5);
-console.log(substractUp(10, 2, 3));
+combine(displayResult.bind(this, "The result after adding all argument is "), "ADD", 1, 2, 3);
+combine(displayResult.bind(this, "The result after adding all argument is "), "ADD", 1, 2, 3, 4, 5);
+combine(displayResult.bind(this, "The result after substracting all argument is "), "SUB", 10, 2, 3);
 
 /*
  *
