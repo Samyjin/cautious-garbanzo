@@ -13,10 +13,15 @@ const LOG_MONSTER_ATTACK = "MONSTER_ATTACK";
 const LOG_GAME_OVER = "GAME_OVER";
 let battleLog = [];
 
-const enteredValue = prompt("Choose MaxLife: ", "100");
-let chosenMaxLife = parseInt(enteredValue);
-if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+
+let chosenMaxLife;
+
+try {
+    chosenMaxLife = getMaxLifeValue();
+} catch (error) {
+    console.error(error.message);
     chosenMaxLife = 100;
+    alert(error.message);
 }
 
 let currentPlayerHealth = chosenMaxLife;
@@ -24,6 +29,15 @@ let currentMonsterHealth = chosenMaxLife;
 let hasBonusLife = true;
 
 adjustHealthBars(chosenMaxLife);
+
+function getMaxLifeValue() {
+    const enteredValue = prompt("Choose MaxLife: ", "100");
+    let parseValue = parseInt(enteredValue);
+    if (isNaN(parseValue) || parseValue <= 0) {
+        throw { message: "Error: The entered number is not a number !" };
+    }
+    return parseValue;
+}
 
 function writeToLog(event, value, playerHP, monsterHP) {
     let logEntry = {
@@ -37,7 +51,7 @@ function writeToLog(event, value, playerHP, monsterHP) {
     // } else if (event === LOG_MONSTER_ATTACK || event === LOG_PLAYER_HEAL) {
     //     logEntry.target = "PLAYER";
     // }
-    
+
     /* 
     *
     If one case is valid, if there is no break keyword, cases are apply falling through 
@@ -150,14 +164,14 @@ function onHeal() {
 }
 
 function onLog() {
+    /* Interresting feature: label
+     *
+     * Rarely use but present in the language.
+     *
+     */
 
-    /* Interresting feature: label 
-    *
-    * Rarely use but present in the language.
-    * 
-    */
-
-    outerWhile: do { // This is a label.
+    outerWhile: do {
+        // This is a label.
         let j = 0;
         innerLoop: for (let k = 0; k < 5; k++) {
             console.log(`j: ${j} k: ${k} `);
@@ -167,12 +181,11 @@ function onLog() {
         }
     } while (i < 3);
 
-
     // for (let i = 0; i < battleLog.length; i++) {
     //     console.log(battleLog[i]);
     // }
 
-    // for-of is used for array ( strings are array of character ). 
+    // for-of is used for array ( strings are array of character ).
     let i = 0;
     for (const logEntry of battleLog) {
         console.log(`#${i}`);
@@ -181,7 +194,6 @@ function onLog() {
         }
         i++;
     }
-
 }
 
 attackBtn.addEventListener("click", onAttack);
