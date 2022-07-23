@@ -85,13 +85,17 @@ startGameBtn.addEventListener("click", () => {
 // Infinite args for a function.
 // REST Operator and arguments keyword
 
-const sumUp = (...numbers) => {
+const sumUp = (callBack, ...numbers) => {
     let sum = 0;
     for (num of numbers) {
         sum += num;
     }
 
-    return sum;
+    callBack(sum);
+};
+
+const displayResult = (number) => {
+    alert("The result is " + number);
 };
 
 const substractUp = function () {
@@ -104,8 +108,8 @@ const substractUp = function () {
     return sum;
 };
 
-console.log(sumUp(1, 2, 3));
-console.log(sumUp(1, 2, 3, 4, 5));
+sumUp(displayResult, 1, 2, 3);
+sumUp(displayResult, 1, 2, 3, 4, 5);
 console.log(substractUp(10, 2, 3));
 
 /*
