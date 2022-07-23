@@ -2,10 +2,13 @@ const defaultResult = 0;
 let currentResult = defaultResult;
 let logEntries = [];
 
+const ADD_OPERATION = "ADD";
+const SUB_OPERATION = "SUB";
+const MUL_OPERATION = "MUL";
+const DIV_OPERATION = "DIV";
+
 /* 
-
 This is a block comment 
-
 */
 
 // Gets input from input field
@@ -34,13 +37,13 @@ function writeToLog(
     console.log(logEntries);
 }
 
-function calulateResult(calculationType) {
+const calulateResult = (calculationType) => {
     const enteredNumber = getUserInputAsNumber();
     if (
-        calculationType !== "ADD" &&
-        calculationType !== "SUBSTRACT" &&
-        calculationType !== "MULTIPLY" &&
-        calculationType !== "DIVIDE" ||
+        calculationType !== ADD_OPERATION &&
+        calculationType !== SUB_OPERATION &&
+        calculationType !== MUL_OPERATION &&
+        calculationType !== DIV_OPERATION ||
         !enteredNumber
     ) {
         return;
@@ -48,16 +51,16 @@ function calulateResult(calculationType) {
 
     const prevResult = currentResult;
     let mathOperator;
-    if (calculationType === "ADD") {
+    if (calculationType === ADD_OPERATION) {
         currentResult += enteredNumber; // currentResult += +userInput.value; <-- shortcut to parse it as number
         mathOperator = "+";
-    } else if (calculationType === "SUBSTRACT") {
+    } else if (calculationType === SUB_OPERATION) {
         currentResult -= enteredNumber;
         mathOperator = "-";
-    } else if (calculationType === "MULTIPLY") {
+    } else if (calculationType === MUL_OPERATION) {
         currentResult *= enteredNumber;
         mathOperator = "*";
-    } else if (calculationType === "DIVIDE") {
+    } else if (calculationType === DIV_OPERATION) {
         currentResult /= enteredNumber;
         mathOperator = "/";
     }
@@ -66,23 +69,23 @@ function calulateResult(calculationType) {
     writeToLog(calculationType, prevResult, enteredNumber, currentResult);
 }
 
-function add() {
-    calulateResult("ADD");
-}
+addBtn.addEventListener("click", calulateResult.bind(this, ADD_OPERATION));
+divideBtn.addEventListener("click",calulateResult.bind(this, DIV_OPERATION));
+subtractBtn.addEventListener("click",calulateResult.bind(this, SUB_OPERATION));
+multiplyBtn.addEventListener("click", calulateResult.bind(this, MUL_OPERATION));
 
-function substract() {
-    calulateResult("SUBSTRACT");
-}
+// function add() {
+//     calulateResult(ADD_OPERATION);
+// }
 
-function multiply() {
-    calulateResult("MULTIPLY");
-}
+// function substract()) {
+//     calulateResult(SUB_OPERATION);
+// }
 
-function divide() {
-    calulateResult("DIVIDE");
-}
+// function multiply() {
+//     calulateResult(MUL_OPERATION);
+// }
 
-addBtn.addEventListener("click", add);
-divideBtn.addEventListener("click", divide);
-subtractBtn.addEventListener("click", substract);
-multiplyBtn.addEventListener("click", multiply);
+// function divide() {
+//     calulateResult(DIV_OPERATION);
+// }
