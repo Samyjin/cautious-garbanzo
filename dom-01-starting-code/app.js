@@ -1,6 +1,8 @@
-const allList = document.querySelectorAll("li");
+const button = document.querySelector("button");
+const section = document.querySelector("section");
 
 
-for (const itemListEl of allList) {
-    console.log(itemListEl);
-}
+button.addEventListener("click", () => {
+    section.classList.toggle("visible");
+    section.classList.toggle("invisible");
+})
