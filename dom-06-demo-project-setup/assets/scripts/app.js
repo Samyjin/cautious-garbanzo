@@ -84,10 +84,10 @@ const deleteMovieHandler = (movieId) => {
 
 
     let deleteModalConfirmBtn = deleteModalActionBtn.children[1];
-    deleteModalConfirmBtn.replaceWith(deleteModalConfirmBtn);
+    deleteModalConfirmBtn.replaceWith(deleteModalConfirmBtn.cloneNode(true));
 
     deleteModalConfirmBtn = deleteModalActionBtn.children[1];
-    deleteActionConfirmBtn.addEventListener("click", deleteMovie.bind(null, movieId));
+    deleteModalConfirmBtn.addEventListener("click", deleteMovie.bind(null, movieId));
 };
 
 const renderNewMovieElem = (id, title, imgUrl, rating) => {
