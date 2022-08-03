@@ -3,6 +3,7 @@ const ERROR_INPUT_ADD_MODAL =
 const ID_ERROR_ADD_MODAL = "error-add-modal";
 
 const addMovieModal = document.getElementById("add-modal");
+const deleteModal = document.getElementById("delete-modal");
 const btnAddMovie = document.querySelector("header button");
 const backdrop = document.getElementById("backdrop");
 const addModalActionBtn = document.querySelector(".modal__actions");
@@ -19,6 +20,11 @@ const toggleMovieModal = () => {
     toggleBackdrop();
     clearUserInputs();
 };
+
+const toggleDeleteModal = () => {
+    deleteModal.classList.toggle("visible");
+    toggleBackdrop();
+}
 
 const toggleBackdrop = () => {
     backdrop.classList.toggle("visible");
@@ -47,9 +53,25 @@ const updateUI = () => {
     } else {
         emptyMovieListMsg.style.display = "none";
     }
+};
+
+const deleteMovie = (movieId) => {
+    let movieIndex = 0;
+    for (let movie of movies) {
+        if (movie.id === movieId) break;
+        movieIndex++;
+    }
+    movies.splice(movieIndex, 1);
+    const list = document.getElementById("movie-list");
+    list.children[movieIndex].remove();
+    updateUI();
 }
 
-const renderNewMovieElem = (title, imgUrl, rating) => {
+const deleteMovieHandler = (movieId) => {
+    toggleDeleteModal();
+};
+
+const renderNewMovieElem = (id, title, imgUrl, rating) => {
     const listElem = document.createElement("li");
     listElem.className = "movie-element";
     listElem.innerHTML = `
@@ -62,26 +84,25 @@ const renderNewMovieElem = (title, imgUrl, rating) => {
     </div>
     `;
 
+    listElem.addEventListener("click", deleteMovieHandler.bind(null, id));
     const list = document.getElementById("movie-list");
     list.append(listElem);
 };
 
 const updateMovieList = () => {
-
     updateUI();
 
     // if (movies.length === 0)
-    //     return ; 
+    //     return ;
 
     // for (let movie of movies) {
     //     if (movie.rendered) continue;
 
     //     listElem = createNewMovieElem(movie.title, movie.imgUrl, movie.rating);
-        
+
     //     movieListElement.append(listElem);
     //     movie.rendered = true;
     // }
-
 };
 
 const addMovieHandler = () => {
@@ -107,6 +128,7 @@ const addMovieHandler = () => {
     }
 
     const movie = {
+        id: Math.random().toString(),
         title: titleValue,
         imgUrl: imgUrlValue,
         rating: rating,
@@ -117,7 +139,7 @@ const addMovieHandler = () => {
 
     toggleMovieModal();
     updateMovieList();
-    renderNewMovieElem(movie.title, movie.imgUrl, movie.rating);
+    renderNewMovieElem(movie.id, movie.title, movie.imgUrl, movie.rating);
 };
 
 const createErrorDiv = (
