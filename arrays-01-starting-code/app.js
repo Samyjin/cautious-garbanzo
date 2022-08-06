@@ -103,58 +103,64 @@ const hobbies = ["Sports", "Cooking"];
 
 // console.log(taxAdjustedPrices);
 
-const prices = [3.49, 2.99, 30.78, 259.99];
-const tax = 0.19;
+// const prices = [3.49, 2.99, 30.78, 259.99];
+// const tax = 0.19;
 
-// Big advantage comparing to for of loop is the direct access to idx
-const taxAdjustedPrices = prices.map((price, idx, prices) => {
-    const priceObj = { index: idx, price: price * (1 + tax) };
-    return priceObj;
-});
-
-console.log(prices, taxAdjustedPrices);
-
-const sortedPrices = prices.sort((a, b) => {
-    if (a > b) return 1;
-    else if (a < b) return -1;
-    return 0;
-}); // By default sort compare strings, add a function to specify sorting
-
-//console.log(sortedPrices.reverse());
-console.log(sortedPrices);
-
-// const filteredPrices = prices.filter((price, idx, prices) => {
-//     return price > 6;
+// // Big advantage comparing to for of loop is the direct access to idx
+// const taxAdjustedPrices = prices.map((price, idx, prices) => {
+//     const priceObj = { index: idx, price: price * (1 + tax) };
+//     return priceObj;
 // });
-const filteredPrices = prices.filter(p => p > 6);
 
-console.log(filteredPrices);
+// console.log(prices, taxAdjustedPrices);
 
-// let sum = 0;
+// const sortedPrices = prices.sort((a, b) => {
+//     if (a > b) return 1;
+//     else if (a < b) return -1;
+//     return 0;
+// }); // By default sort compare strings, add a function to specify sorting
 
-// prices.forEach(price => sum += price);
+// //console.log(sortedPrices.reverse());
+// console.log(sortedPrices);
 
+// // const filteredPrices = prices.filter((price, idx, prices) => {
+// //     return price > 6;
+// // });
+// const filteredPrices = prices.filter(p => p > 6);
+
+// console.log(filteredPrices);
+
+// // let sum = 0;
+
+// // prices.forEach(price => sum += price);
+
+// // console.log(sum);
+
+// const sum = prices.reduce((pValue, cValue) => pValue + cValue, 0);
 // console.log(sum);
 
-const sum = prices.reduce((pValue, cValue) => pValue + cValue, 0);
-console.log(sum);
+// const dataFromString = "paris;20;2022";
+// console.log(dataFromString.split(";"));
 
-const dataFromString = "paris;20;2022";
-console.log(dataFromString.split(";"));
+// const nameFragments = ["Dan", "Desyama"];
+// console.log(nameFragments.join(" "));
 
-const nameFragments = ["Dan", "Desyama"];
-console.log(nameFragments.join(" "));
+// const copiedNameFragments = [...nameFragments];
+// console.log(nameFragments, copiedNameFragments);
 
-const copiedNameFragments = [...nameFragments];
-console.log(nameFragments, copiedNameFragments);
+// console.log(Math.min(...prices)); // Spread operator very useful for this
 
-console.log(Math.min(...prices)); // Spread operator very useful for this
+// const persons = [{name: "Max", age: 30}, {name:"Manuel", age: 31}];
+// const copiedPersons = [...persons]; // Carefull this line copies adresses
 
-const persons = [{name: "Max", age: 30}, {name:"Manuel", age: 31}];
-const copiedPersons = [...persons]; // Carefull this line copies adresses
+// persons[0].age = 32; // Data in copiedPersons will be modifyied to
+// persons.push("Anna");
 
-persons[0].age = 32; // Data in copiedPersons will be modifyied to
-persons.push("Anna");
+// console.log(persons, copiedPersons);
 
-console.log(persons, copiedPersons);
+const nameData = ["Dan", "Desyama", 30, "Mr."];
+// const firstName = nameData[0];
+// const lastName = nameData[1];
 
+const [ firstName, lastName, ...otherInformations ] = nameData;
+console.log(firstName, lastName, otherInformations);
