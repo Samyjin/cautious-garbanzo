@@ -130,3 +130,12 @@ const filteredPrices = prices.filter(p => p > 6);
 
 console.log(filteredPrices);
 
+// let sum = 0;
+
+// prices.forEach(price => sum += price);
+
+// console.log(sum);
+
+const sum = prices.reduce((pValue, cValue) => pValue + cValue, 0);
+console.log(sum);
+
