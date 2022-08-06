@@ -44,7 +44,7 @@ const hobbies = ["Sports", "Cooking"];
 // // hobbies[5] = "Reading"; // Extend the array and add undefined to between slots
 // console.log(hobbies);
 
-/* Splice Method */
+/* Splice and Slice Methods */
 
 // hobbies.splice(1, 0, "Good Food"); // Insert good food at the index 1 and remove zero elements
 // console.log(hobbies);
@@ -58,28 +58,49 @@ const hobbies = ["Sports", "Cooking"];
 // const testResults = [3, 4.9, -10, 9];
 // const storedResults = testResults.slice(2); // Return testResults from index 2 
 
-const testResults = [3, 4.9, -10, 9];
-const storedResults = testResults.concat([22, 7.9, 89]);
-const personalData = [{name: "Jack"}, {name: "Stephen"}];
+/* concat, indexOf, lastIndexOf, find, findIndex and includes */
 
-testResults.push(3);
+// const testResults = [3, 4.9, -10, 9];
+// const storedResults = testResults.concat([22, 7.9, 89]);
+// const personalData = [{name: "Jack"}, {name: "Stephen"}];
 
-console.log(testResults, storedResults);
-console.log(testResults.indexOf(3)); // Return the first entry find in the array 
-console.log(testResults.lastIndexOf(3)); // Return the first entry starting from the end
-console.log(personalData.indexOf({name: "Jack"})) // Return -1 because of reference of objects
+// testResults.push(3);
 
-const jack = personalData.find((person, idx, persons) => {
-    return person.name === "Jack"; // Find return a reference not a copy !
-});
+// console.log(testResults, storedResults);
+// console.log(testResults.indexOf(3)); // Return the first entry find in the array 
+// console.log(testResults.lastIndexOf(3)); // Return the first entry starting from the end
+// console.log(personalData.indexOf({name: "Jack"})) // Return -1 because of reference of objects
 
-const stephenIndex = personalData.findIndex((person, idx, persons) => {
-    return person.name === "Stephen";
-}); 
+// const jack = personalData.find((person, idx, persons) => {
+//     return person.name === "Jack"; // Find return a reference not a copy !
+// });
 
-console.log(jack);
-// jack.name = "Jack II";
-console.log(stephenIndex);
-console.log(personalData);
+// const stephenIndex = personalData.findIndex((person, idx, persons) => {
+//     return person.name === "Stephen";
+// }); 
 
-console.log(testResults.includes(4.9)); // .includes in JS not .contain
+// console.log(jack);
+// // jack.name = "Jack II";
+// console.log(stephenIndex);
+// console.log(personalData);
+
+// console.log(testResults.includes(4.9)); // .includes in JS not .contain
+
+/* For each function */
+// const prices = [3.49, 2.99, 30.78, 259.99];
+// const tax = 0.19;
+
+// const taxAdjustedPrices = [];
+
+// // for (const price of prices) {
+// //     taxAdjustedPrices.push(price * (1 + tax));
+// // }
+
+// // Big advantage comparing to for of loop is the direct access to idx
+// prices.forEach((price, idx, prices) => {
+//     taxAdjustedPrices.push(price * (1 + tax));
+// });
+
+// console.log(taxAdjustedPrices);
+
+
