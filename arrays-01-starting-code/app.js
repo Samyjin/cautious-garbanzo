@@ -139,3 +139,9 @@ console.log(filteredPrices);
 const sum = prices.reduce((pValue, cValue) => pValue + cValue, 0);
 console.log(sum);
 
+const dataFromString = "paris;20;2022";
+console.log(dataFromString.split(";"));
+
+const nameFragments = ["Dan", "Desyama"];
+console.log(nameFragments.join(" "));
+
