@@ -150,3 +150,11 @@ console.log(nameFragments, copiedNameFragments);
 
 console.log(Math.min(...prices)); // Spread operator very useful for this
 
+const persons = [{name: "Max", age: 30}, {name:"Manuel", age: 31}];
+const copiedPersons = [...persons]; // Carefull this line copies adresses
+
+persons[0].age = 32; // Data in copiedPersons will be modifyied to
+persons.push("Anna");
+
+console.log(persons, copiedPersons);
+
