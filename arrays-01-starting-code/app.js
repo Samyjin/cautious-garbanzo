@@ -103,4 +103,13 @@ const hobbies = ["Sports", "Cooking"];
 
 // console.log(taxAdjustedPrices);
 
+const prices = [3.49, 2.99, 30.78, 259.99];
+const tax = 0.19;
 
+// Big advantage comparing to for of loop is the direct access to idx
+const taxAdjustedPrices = prices.map((price, idx, prices) => {
+    const priceObj = {index: idx, price: price * (1 + tax)};
+    return priceObj;
+});
+
+console.log(prices, taxAdjustedPrices);
