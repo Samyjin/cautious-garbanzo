@@ -19,7 +19,7 @@ console.log(yetMoreNumbers);
 
 // const hobbies = ["Cooking", "Hiking", "Chess"]; // Uniform data
 
-// const personalData = [30, "Max", {moreDetails : []}]; // Mixed 
+// const personalData = [30, "Max", {moreDetails : []}]; // Mixed
 
 // const analyticsData = [[1.0, 2.3], [9.4, 8.3]]; // Multi dimentional array
 
@@ -56,7 +56,7 @@ const hobbies = ["Sports", "Cooking"];
 // console.log(hobbies);
 
 // const testResults = [3, 4.9, -10, 9];
-// const storedResults = testResults.slice(2); // Return testResults from index 2 
+// const storedResults = testResults.slice(2); // Return testResults from index 2
 
 /* concat, indexOf, lastIndexOf, find, findIndex and includes */
 
@@ -67,7 +67,7 @@ const hobbies = ["Sports", "Cooking"];
 // testResults.push(3);
 
 // console.log(testResults, storedResults);
-// console.log(testResults.indexOf(3)); // Return the first entry find in the array 
+// console.log(testResults.indexOf(3)); // Return the first entry find in the array
 // console.log(testResults.lastIndexOf(3)); // Return the first entry starting from the end
 // console.log(personalData.indexOf({name: "Jack"})) // Return -1 because of reference of objects
 
@@ -77,7 +77,7 @@ const hobbies = ["Sports", "Cooking"];
 
 // const stephenIndex = personalData.findIndex((person, idx, persons) => {
 //     return person.name === "Stephen";
-// }); 
+// });
 
 // console.log(jack);
 // // jack.name = "Jack II";
@@ -108,8 +108,18 @@ const tax = 0.19;
 
 // Big advantage comparing to for of loop is the direct access to idx
 const taxAdjustedPrices = prices.map((price, idx, prices) => {
-    const priceObj = {index: idx, price: price * (1 + tax)};
+    const priceObj = { index: idx, price: price * (1 + tax) };
     return priceObj;
 });
 
 console.log(prices, taxAdjustedPrices);
+
+const sortedPrices = prices.sort((a, b) => {
+    if (a > b) return 1;
+    else if (a < b) return -1;
+    return 0;
+}); // By default sort compare strings, add a function to specify sorting
+
+//console.log(sortedPrices.reverse());
+console.log(sortedPrices);
+
