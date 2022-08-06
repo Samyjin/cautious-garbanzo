@@ -145,3 +145,8 @@ console.log(dataFromString.split(";"));
 const nameFragments = ["Dan", "Desyama"];
 console.log(nameFragments.join(" "));
 
+const copiedNameFragments = [...nameFragments];
+console.log(nameFragments, copiedNameFragments);
+
+console.log(Math.min(...prices)); // Spread operator very useful for this
+
